@@ -20,7 +20,7 @@ public class seleniumTest {
     static ExtentReports report;
     public static ExtentTest test;
     static ExtentReports extent = new ExtentReports();
-    @BeforeSuite
+    @BeforeMethod
     public static void setUp(){
         String path = System.getProperty("user.dir") + "\\driver\\chromedriver.exe";
         System.setProperty("webdriver.chrome.driver", path);
@@ -66,7 +66,7 @@ public class seleniumTest {
 
     }
 
-    @AfterSuite
+    @AfterMethod
     void cleanUp(){
         extent.flush();
         driver.quit();

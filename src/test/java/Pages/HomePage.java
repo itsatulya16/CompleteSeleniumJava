@@ -14,11 +14,11 @@ public class HomePage {
     public static void setUsername(){
         driver.findElement(By.xpath(username)).sendKeys("atul");
         test.log(Status.PASS, "this is passed");
-        test.fail(MediaEntityBuilder.createScreenCaptureFromBase64String("base64").build());
+        test.pass(MediaEntityBuilder.createScreenCaptureFromBase64String("base64").build());
     }
 
     public static void setPassWord(){
         driver.findElement(By.xpath(passWord)).sendKeys("Test");
-        test.fail(MediaEntityBuilder.createScreenCaptureFromBase64String("base64").build());
+        test.pass(MediaEntityBuilder.createScreenCaptureFromBase64String("base64").build());
     }
 }
