@@ -20,7 +20,7 @@ public class seleniumTest {
     static ExtentReports report;
     public static ExtentTest test;
     static ExtentReports extent = new ExtentReports();
-    @BeforeMethod
+    @BeforeSuite
     public static void setUp(){
         driver = new ChromeDriver();
         driver.get("https://www.facebook.com/");
@@ -64,7 +64,7 @@ public class seleniumTest {
 
     }
 
-    @AfterMethod
+    @AfterSuite
     void cleanUp(){
         extent.flush();
         driver.quit();
