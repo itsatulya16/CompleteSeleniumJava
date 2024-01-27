@@ -22,6 +22,8 @@ public class seleniumTest {
     static ExtentReports extent = new ExtentReports();
     @BeforeSuite
     public static void setUp(){
+        String path = System.getProperty("user.dir") + "\\driver\\chromedriver.exe";
+        System.setProperty("webdriver.chrome.driver", path);
         driver = new ChromeDriver();
         driver.get("https://www.facebook.com/");
         ExtentSparkReporter spark = new ExtentSparkReporter("target/Spark.html");
