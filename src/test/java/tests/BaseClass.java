@@ -3,7 +3,6 @@ package tests;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterMethod;
@@ -19,11 +18,13 @@ public class BaseClass {
     @BeforeMethod
     public static void setUp(){
 
-//        String path = System.getProperty("user.dir") + "\\driver\\chromedriver.exe";
-//        System.setProperty("webdriver.chrome.driver", path);
+        String path = System.getProperty("user.dir") + "\\driver\\chromedriver.exe";
+        System.setProperty("webdriver.chrome.driver", path);
 
-        // following code is using webdriver manager
-        WebDriverManager.chromedriver().setup();
+//TODO
+//          following code is using webdriver manager
+//        WebDriverManager.chromedriver().clearDriverCache().setup();
+
         driver = new ChromeDriver();
         driver.get("https://www.facebook.com/");
         ExtentSparkReporter spark = new ExtentSparkReporter("target/Spark.html");
