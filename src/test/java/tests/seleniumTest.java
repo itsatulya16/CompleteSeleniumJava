@@ -27,4 +27,12 @@ public class seleniumTest extends BaseClass {
         HomePage.setPassWord();
 
     }
+
+    @Test
+    void validateEbayOpens() {
+        test = extent.createTest("validate ebay opens");
+        HomePage homePage = new HomePage();
+        homePage.validateEbayOpen();
+
+    }
 }

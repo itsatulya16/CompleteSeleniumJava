@@ -26,11 +26,10 @@ public class BaseClass {
 //        WebDriverManager.chromedriver().clearDriverCache().setup();
 
         driver = new ChromeDriver();
-        driver.get("https://www.facebook.com/");
+        driver.get("https://www.ebay.com/");
         ExtentSparkReporter spark = new ExtentSparkReporter("target/Spark.html");
         extent.attachReporter(spark);
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
     }
 
     @AfterMethod
