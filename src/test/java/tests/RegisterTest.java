@@ -32,7 +32,7 @@ public class RegisterTest extends BaseClass{
         RegisterPage.validateRadioOptionsDisplay(personalRadioOptLabel, businessRadioOptLabel);
 
         /*@Step 4: select personal account radio option*/
-        registerPage.selectRadioOption(personalRadioOpt);
+        registerPage.selectRadioOption(personalRadioOptLabel);
 
         /*@Step 5: validate below fields display
         * 1.first name

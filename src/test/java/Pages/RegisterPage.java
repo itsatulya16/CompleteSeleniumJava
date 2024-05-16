@@ -11,8 +11,8 @@ public class RegisterPage {
     private static String registerLink = "//a[contains(@href,'https://signup.eb')]";
     private static String creatAccount = "//h1[contains(text(),'Create an account')]";
     public static String personalRadioOpt = "//input[@id='personalaccount-radio']";
-    public static String personalRadioOptLabel = "//*[contains(text(),'Personal account')]";
-    public static String businessRadioOptLabel = "//*[contains(text(),'Business account')]";
+    public static String personalRadioOptLabel = "//label[contains(text(),'Personal')]";
+    public static String businessRadioOptLabel = "//label[contains(text(),'Business')]";
     public static String firstName = "//input[contains(@id,'firstname')]";
     public static String lastName = "//input[contains(@id,'lastname')]";
     public static String email = "//input[contains(@id,'Email')]";
