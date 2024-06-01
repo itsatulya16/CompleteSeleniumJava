@@ -34,7 +34,7 @@ public class BaseClass {
     @AfterMethod
     void cleanUp(){
         extent.flush();
-        driver.quit();
+      //  driver.quit();
     }
 
     // TODO fix that method

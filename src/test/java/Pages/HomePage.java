@@ -3,8 +3,11 @@ package Pages;
 import Utils.Utility;
 import com.aventstack.extentreports.MediaEntityBuilder;
 import com.aventstack.extentreports.Status;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 
+import static tests.BaseClass.driver;
 import static tests.seleniumTest.test;
 
 public class HomePage {
@@ -26,5 +29,10 @@ public class HomePage {
     public void validateEbayOpen(){
         boolean ebayOpen = Utility.waitForElementVisibility(ebaySearchBox).isDisplayed();
         Assert.assertTrue(ebayOpen, "Not landed on correct page");
+    }
+
+    public void searchItem(String item){
+        Utility.waitForElementVisibility(ebaySearchBox).sendKeys(item);
+        Utility.waitForElementVisibility(ebaySearchBox).sendKeys(Keys.ENTER);
     }
 }
