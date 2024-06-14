@@ -26,7 +26,7 @@ public class BaseClass {
 
         driver = new ChromeDriver();
         driver.get("https://www.ebay.com/");
-        ExtentSparkReporter spark = new ExtentSparkReporter("target/Spark.html");
+        ExtentSparkReporter spark = new ExtentSparkReporter("src/Reports/Spark.html");
         extent.attachReporter(spark);
         driver.manage().window().maximize();
     }
