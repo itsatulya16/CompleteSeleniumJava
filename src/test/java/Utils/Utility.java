@@ -14,9 +14,9 @@ import java.time.Duration;
 
 public class Utility extends BaseClass {
     /*
-    * This method is implemented with explicit wait
-    * */
-    public static WebElement getWaitExplicit(String xpath){
+     * This method is implemented with explicit wait
+     * */
+    public static WebElement getWaitExplicit(String xpath) {
         WebElement element = driver.findElement(By.xpath(xpath));
         Wait<WebDriver> wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         wait.until(ExpectedConditions.visibilityOf(element));
@@ -24,8 +24,8 @@ public class Utility extends BaseClass {
     }
 
     /*
-    * This method is  used to element visiblity, implemented with Fluent wait
-    * */
+     * This method is  used to element visiblity, implemented with Fluent wait
+     * */
     public static WebElement waitForElementVisibility(String xpath) {
         if (xpath == null || xpath.isEmpty()) {
             throw new IllegalArgumentException("XPath cannot be null or empty");
@@ -38,8 +38,8 @@ public class Utility extends BaseClass {
     }
 
     /*
-    * This method is used to wait until element is ready to click
-    * */
+     * This method is used to wait until element is ready to click
+     * */
     public static WebElement waitForElementToBeClickable(String xpath) {
         if (xpath == null || xpath.isEmpty()) {
             throw new IllegalArgumentException("XPath cannot be null or empty");

@@ -2,18 +2,21 @@ package tests;
 
 import Pages.HomePage;
 import Pages.RegisterPage;
+import Utils.MyListnerSetUp;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import static Pages.RegisterPage.*;
 
-public class RegisterTest extends BaseClass{
+@Listeners(MyListnerSetUp.class)
+public class RegisterTest extends BaseClass {
 
     /*
-    * @author - Atul Ambade
-    * Description - validate registration fields with valid credentials
-    * */
+     * @author - Atul Ambade
+     * Description - validate registration fields with valid credentials
+     * */
     @Test
-    public void validatePersonalRegistrationWithValidCredentials(){
+    public void validatePersonalRegistrationWithValidCredentials() {
         String firstNameValue = "Atul";
         String lastNameValue = "Automation Tester";
         String emailValue = "Atul@gmail.com";
@@ -35,11 +38,11 @@ public class RegisterTest extends BaseClass{
         registerPage.selectRadioOption(personalRadioOptLabel);
 
         /*@Step 5: validate below fields display
-        * 1.first name
-        * 2.Last name
-        * 3.Email
-        * 4.Password
-        * Expected: filds display*/
+         * 1.first name
+         * 2.Last name
+         * 3.Email
+         * 4.Password
+         * Expected: filds display*/
         registerPage.validateFieldsDisplay(firstName, lastName, email, password);
 
         /*@Step 6: enter first name, Expected: value entered*/

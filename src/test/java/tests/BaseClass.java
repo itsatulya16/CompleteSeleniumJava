@@ -11,29 +11,17 @@ import org.testng.annotations.BeforeMethod;
 
 public class BaseClass {
     public static WebDriver driver;
-    static ExtentReports report;
-    public static ExtentTest test;
-    static ExtentReports extent = new ExtentReports();
+
     @BeforeMethod
-    public static void setUp(){
-
-//        String path = System.getProperty("user.dir") + "\\driver\\chromedriver.exe";
-//        System.setProperty("webdriver.chrome.driver", path);
-
-//TODO
-       //   following code is using webdriver manager
+    public static void setUp() {
         WebDriverManager.chromedriver().clearDriverCache().setup();
-
         driver = new ChromeDriver();
         driver.get("https://www.ebay.com/");
-        ExtentSparkReporter spark = new ExtentSparkReporter("src/Reports/Spark.html");
-        extent.attachReporter(spark);
         driver.manage().window().maximize();
     }
 
     @AfterMethod
-    void cleanUp(){
-        extent.flush();
+    void cleanUp() {
         driver.quit();
     }
 
