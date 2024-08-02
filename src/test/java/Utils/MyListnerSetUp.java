@@ -34,7 +34,7 @@ public class MyListnerSetUp implements ITestListener {
     public void onTestSuccess(ITestResult result) {
         test = extentReports.createTest(result.getName());
         test.log(Status.PASS, MarkupHelper.createLabel("Test Passed: " + result.getName(), ExtentColor.GREEN));
-        test.assignAuthor("Atul Ambade");
+        test.assignAuthor("Atul Ambade patil");
     }
 
     /**
