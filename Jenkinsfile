@@ -30,11 +30,6 @@ pipeline {
             steps {
                 bat "mvn test"
             }
-            post {
-                            always {
-                                junit 'target/surefire-reports/testng-results.xml'
-                            }
-                        }
         }
 
         stage('publish reports') {
