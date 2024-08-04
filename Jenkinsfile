@@ -8,15 +8,15 @@ pipeline {
 
     stages {
 
-        stage('clone Repository') {
-            steps {
-                git credentialsId: 'bef29e93-1930-40d6-a967-ae4c2dbf7f01', url: 'https://gitlab.com/atulambade/completselenium.git'
-            }
-        }
+//         stage('clone Repository') {
+//             steps {
+//                 git credentialsId: 'bef29e93-1930-40d6-a967-ae4c2dbf7f01', url: 'https://gitlab.com/atulambade/completselenium.git'
+//             }
+//         }
 
         stage('clean up') {
             steps {
-                bat "mvn clean"
+                bat 'mvn -B -DskipTests clean package'
             }
         }
 
