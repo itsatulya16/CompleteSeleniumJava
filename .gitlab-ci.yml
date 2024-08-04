@@ -1,0 +1,25 @@
+image: maven:3.9.0-eclipse-temurin-17
+
+stages:
+  - build
+#  - test
+
+before_script:
+  - echo "Maven project setup"
+
+build:
+  stage: build
+  script:
+    - mvn clean install -DskipTests
+  artifacts:
+    paths:
+      - target/*.jar
+
+#test:
+#  stage: test
+#  script:
+#    - mvn test
+#  artifacts:
+#    when: always
+#    reports:
+#      junit: target/surefire-reports/TEST-*.xml
