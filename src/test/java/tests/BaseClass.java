@@ -9,11 +9,10 @@ import org.testng.annotations.BeforeMethod;
 public class BaseClass {
     public static WebDriver driver;
 
-    @BeforeMethod
-    public static void setUp() {
+    public static void setUp(String url) {
         WebDriverManager.chromedriver().clearDriverCache().setup();
         driver = new ChromeDriver();
-        driver.get("https://www.ebay.com/");
+        driver.get(url);
         driver.manage().window().maximize();
     }
 

@@ -2,6 +2,7 @@ package tests;
 
 import Pages.HomePage;
 import Pages.RegisterPage;
+import Pages.fb_page;
 import Utils.MyListnerSetUp;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -23,6 +24,7 @@ public class RegisterTest extends BaseClass {
         String passwordValue = "Test@1234";
 
         /*@Step 1: login to ebay, Expected: login successful*/
+        setUp("https://www.ebay.com/");
         HomePage homePage = new HomePage();
         homePage.validateEbayOpen();
 
@@ -59,5 +61,36 @@ public class RegisterTest extends BaseClass {
 
         /*@Step 10: validate Registed button is enabled*/
         registerPage.validateFormRegisterButtonEnable();
+    }
+
+    /*
+     * @author - Atul Ambade
+     * Description - validate ebay home page opens
+     * */
+    @Test
+    public void validateEbaySiteOpens() {
+        /*@Step 1: launch browser and hit ebay link, Expected: validate ebay home page opens*/
+        setUp("https://www.ebay.com/");
+        HomePage homePage = new HomePage();
+        homePage.validateEbayOpen();
+    }
+
+    @Test(description = "validate fb open")
+    public void validateFbOpens(){
+        setUp("https://www.facebook.com/");
+    }
+
+    @Test(description = "validate username entered in textBox")
+    public void validateUserNameEntered(){
+        setUp("https://www.facebook.com/");
+        fb_page fb = new fb_page();
+        fb.enterUserName("bala");
+    }
+
+    @Test(description = "validate username entered in textBox")
+    public void validatePasswordEntered(){
+        setUp("https://www.facebook.com/");
+        fb_page fb = new fb_page();
+        fb.enterPassword("Pass@1233");
     }
 }
