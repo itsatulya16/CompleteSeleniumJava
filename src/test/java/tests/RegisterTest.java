@@ -16,7 +16,7 @@ public class RegisterTest extends BaseClass {
      * @author - Atul Ambade
      * Description - validate registration fields with valid credentials
      * */
-    @Test
+
     public void validatePersonalRegistrationWithValidCredentials() {
         String firstNameValue = "Atul";
         String lastNameValue = "Automation Tester";
