@@ -18,7 +18,7 @@ public class Test_connection_local {
             String query = "SELECT * FROM employees";
             // Optional: Execute a query to verify
             Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(query); // Replace with your table name
+            ResultSet resultSet = statement.executeQuery(query);
 
 
             while (resultSet.next()) {
