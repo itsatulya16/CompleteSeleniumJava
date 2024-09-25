@@ -8,12 +8,6 @@ pipeline {
 
     stages {
 
-//         stage('clone Repository') {
-//             steps {
-//                 git credentialsId: 'bef29e93-1930-40d6-a967-ae4c2dbf7f01', url: 'https://gitlab.com/atulambade/completselenium.git'
-//             }
-//         }
-
         stage('clean up') {
             steps {
                 bat 'mvn -B -DskipTests clean package'
@@ -28,20 +22,20 @@ pipeline {
 
         stage('test execute') {
             steps {
-                bat "mvn test"
+                catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE') {
+                    bat "mvn test"
+                }
             }
         }
+    }
 
-        stage('publish reports') {
-            steps{
-                publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'target', reportFiles: 'Spark.html', reportName: 'ExtentHTMLReport', reportTitles: '', useWrapperFileDirectly: true])
-            }
-        }
+    post {
+        always {
+            // Publish HTML report even if the test stage failed
+            publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'target', reportFiles: 'Spark.html', reportName: 'ExtentHTMLReport', reportTitles: '', useWrapperFileDirectly: true])
 
-         stage('clean worksplace') {
-            steps {
-               cleanWs()
-            }
+            // Clean workspace
+            cleanWs()
         }
     }
 }

@@ -16,7 +16,7 @@ public class RegisterTest extends BaseClass {
      * @author - Atul Ambade
      * Description - validate registration fields with valid credentials
      * */
-
+    @Test
     public void validatePersonalRegistrationWithValidCredentials() {
         String firstNameValue = "Atul";
         String lastNameValue = "Automation Tester";
@@ -76,19 +76,19 @@ public class RegisterTest extends BaseClass {
     }
 
     @Test(description = "validate fb open")
-    public void validateFbOpens(){
+    public void validateFbOpens() {
         setUp("https://www.facebook.com/");
     }
 
     @Test(description = "validate username entered in textBox")
-    public void validateUserNameEntered(){
+    public void validateUserNameEntered() {
         setUp("https://www.facebook.com/");
         fb_page fb = new fb_page();
         fb.enterUserName("bala");
     }
 
     @Test(description = "validate username entered in textBox")
-    public void validatePasswordEntered(){
+    public void validatePasswordEntered() {
         setUp("https://www.facebook.com/");
         fb_page fb = new fb_page();
         fb.enterPassword("Pass@1233");
