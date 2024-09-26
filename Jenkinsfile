@@ -22,7 +22,7 @@ pipeline {
 
         stage('test execute') {
             steps {
-                catchError(buildResult: 'SUCCESS', stageResult: 'SUCCESS') {
+                catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE') {
                     bat "mvn test"
                 }
             }
