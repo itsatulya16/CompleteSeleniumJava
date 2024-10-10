@@ -17,7 +17,7 @@ public class MyListnerSetUp implements ITestListener {
 
     public void configureReports() {
         extentReports = new ExtentReports();
-        spark = new ExtentSparkReporter("target/Spark.html");
+        spark = new ExtentSparkReporter("Reports/Spark.html");
         extentReports.attachReporter(spark);
     }
 
