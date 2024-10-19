@@ -1,10 +1,13 @@
 package tests;
 
+import DB_Testing.TestLogger;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeTest;
 
 public class BaseClass {
     public static WebDriver driver;
@@ -15,9 +18,18 @@ public class BaseClass {
         driver.get(url);
         driver.manage().window().maximize();
     }
+    @BeforeTest
+    public void clearDBLogs(){
+        TestLogger.clearTestResults();
+    }
 
     @AfterMethod
-    void cleanUp() {
+    public void logResult(ITestResult result) {
+        String testName = result.getName();
+        String status = result.isSuccess() ? "PASS" : "FAIL";
+        double executionTime = (result.getEndMillis() - result.getStartMillis()) / 1000.0;
+
+        TestLogger.logTestResult(testName, status, executionTime);
         driver.quit();
     }
 
