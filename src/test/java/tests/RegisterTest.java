@@ -4,6 +4,7 @@ import Pages.HomePage;
 import Pages.RegisterPage;
 import Pages.fb_page;
 import Utils.MyListnerSetUp;
+import org.openqa.selenium.By;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
@@ -92,5 +93,17 @@ public class RegisterTest extends BaseClass {
         setUp("https://www.facebook.com/");
         fb_page fb = new fb_page();
         fb.enterPassword("Pass@1233");
+    }
+
+// reading data from csv file//
+    @Test(dataProvider = "csvData", dataProviderClass = CSVDataProvider.class, description = "validate username and password entered in textBox")
+    public void testLogin(String username, String password, String desc) {
+        setUp("https://www.facebook.com/");
+        fb_page fb = new fb_page();
+        fb.enterUserName(username);
+        fb.enterPassword(password);
+
+        // Add assertions as needed
+        System.out.println("Test executed for: " + desc);
     }
 }
