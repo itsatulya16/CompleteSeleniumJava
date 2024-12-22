@@ -51,6 +51,7 @@ public class Utility extends BaseClass {
         return wait.until(ExpectedConditions.elementToBeClickable(By.xpath(xpath)));
     }
 
+    // This method is used to take screen shot of page
     public static FileInputStream takeScreenShot() throws FileNotFoundException {
         TakesScreenshot screenshot = (TakesScreenshot) driver;
         File srcFile = screenshot.getScreenshotAs(OutputType.FILE);

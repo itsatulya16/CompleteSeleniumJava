@@ -4,9 +4,6 @@ import DB_Testing.TestLogger;
 import Utils.Utility;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import io.qameta.allure.Allure;
-import io.qameta.allure.Attachment;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.ITestResult;
@@ -24,20 +21,20 @@ public class BaseClass {
         WebDriverManager.chromedriver().clearDriverCache().setup();
         driver = new ChromeDriver();
         driver.manage().window().maximize();
-        driver.get("https://www.ebay.com"); // Default URL (replace with your URL)
+        driver.get("https://www.facebook.com/"); // Default URL (replace with your URL)
     }
 
-//    @BeforeTest
-//    public void clearDBLogs() {
-//        TestLogger.clearTestResults();
-//    }
+    @BeforeTest
+    public void clearDBLogs() {
+        TestLogger.clearTestResults();
+    }
 
     // @IMP : following code is for attaching screenshot to allure report when test case failed
     @AfterMethod
     public void tearDown(ITestResult result) throws InterruptedException, FileNotFoundException {
         if (ITestResult.FAILURE == result.getStatus()) {
             System.out.println("Test failed: " + result.getName());
-            Allure.addAttachment(" username", Utility.takeScreenShot());
+            Allure.addAttachment(result.getName(), Utility.takeScreenShot());
         }
         if (driver != null) {
             driver.quit();
