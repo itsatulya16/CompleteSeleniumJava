@@ -1,8 +1,10 @@
 package Pages;
 
 import Utils.Utility;
+import org.testng.Assert;
+import tests.BaseClass;
 
-public class fb_page {
+public class fb_page extends BaseClass {
 
     private String userName = "//*[@id='email']";
     private String passWord = "//*[@id='pass']";
@@ -13,6 +15,11 @@ public class fb_page {
 
     public void enterPassword(String passWord) {
         Utility.waitForElementVisibility(this.passWord).sendKeys(passWord);
+    }
+
+    public void validateTitle(String expected){
+      String tiitle =   driver.getTitle();
+        Assert.assertEquals(tiitle, expected, "title not matches");
     }
 
 }

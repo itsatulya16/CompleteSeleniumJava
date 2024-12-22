@@ -1,15 +1,15 @@
 package Utils;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import tests.BaseClass;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.time.Duration;
 
 public class Utility extends BaseClass {
@@ -49,5 +49,11 @@ public class Utility extends BaseClass {
                 .pollingEvery(Duration.ofMillis(2))
                 .ignoring(NoSuchElementException.class);
         return wait.until(ExpectedConditions.elementToBeClickable(By.xpath(xpath)));
+    }
+
+    public static FileInputStream takeScreenShot() throws FileNotFoundException {
+        TakesScreenshot screenshot = (TakesScreenshot) driver;
+        File srcFile = screenshot.getScreenshotAs(OutputType.FILE);
+        return new FileInputStream(srcFile);
     }
 }

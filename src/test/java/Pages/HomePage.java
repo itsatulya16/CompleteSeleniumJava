@@ -19,7 +19,7 @@ public class HomePage {
 
     public void validateEbayOpen() {
         boolean ebayOpen = Utility.waitForElementVisibility(ebaySearchBox).isDisplayed();
-        Assert.assertTrue(ebayOpen, "Not landed on correct page");
+        Assert.assertTrue(!ebayOpen, "Not landed on correct page");
     }
 
     public void searchItem(String item) {

@@ -10,7 +10,7 @@ import org.testng.annotations.Test;
 
 import static Pages.RegisterPage.*;
 
-@Listeners(MyListnerSetUp.class)
+//@Listeners(MyListnerSetUp.class)
 public class RegisterTest extends BaseClass {
 
     /*
@@ -25,7 +25,6 @@ public class RegisterTest extends BaseClass {
         String passwordValue = "Test@1234";
 
         /*@Step 1: login to ebay, Expected: login successful*/
-        setUp("https://www.ebay.com/");
         HomePage homePage = new HomePage();
         homePage.validateEbayOpen();
 
@@ -71,26 +70,19 @@ public class RegisterTest extends BaseClass {
     @Test
     public void validateEbaySiteOpens() {
         /*@Step 1: launch browser and hit ebay link, Expected: validate ebay home page opens*/
-        setUp("https://www.ebay.com/");
         HomePage homePage = new HomePage();
         homePage.validateEbayOpen();
     }
 
-    @Test(description = "validate fb open")
-    public void validateFbOpens() {
-        setUp("https://www.facebook.com/");
-    }
 
     @Test(description = "validate username entered in textBox")
     public void validateUserNameEntered() {
-        setUp("https://www.facebook.com/");
         fb_page fb = new fb_page();
         fb.enterUserName("bala");
     }
 
     @Test(description = "validate username entered in textBox")
     public void validatePasswordEntered() {
-        setUp("https://www.facebook.com/");
         fb_page fb = new fb_page();
         fb.enterPassword("Pass@1233");
     }
@@ -98,11 +90,9 @@ public class RegisterTest extends BaseClass {
 // reading data from csv file//
     @Test(dataProvider = "csvData", dataProviderClass = CSVDataProvider.class, description = "validate username and password entered in textBox")
     public void testLogin(String username, String password, String desc) {
-        setUp("https://www.facebook.com/");
         fb_page fb = new fb_page();
         fb.enterUserName(username);
         fb.enterPassword(password);
-
         // Add assertions as needed
         System.out.println("Test executed for: " + desc);
     }

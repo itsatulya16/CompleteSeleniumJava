@@ -1,7 +1,12 @@
 package tests;
 
 import DB_Testing.TestLogger;
+import Utils.Utility;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import io.qameta.allure.Allure;
+import io.qameta.allure.Attachment;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.ITestResult;
@@ -9,36 +14,47 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 
+import java.io.FileNotFoundException;
+
 public class BaseClass {
     public static WebDriver driver;
 
-    public static void setUp(String url) {
+    @BeforeMethod
+    public void setUp() {
         WebDriverManager.chromedriver().clearDriverCache().setup();
         driver = new ChromeDriver();
-        driver.get(url);
         driver.manage().window().maximize();
-    }
-    @BeforeTest
-    public void clearDBLogs(){
-        TestLogger.clearTestResults();
+        driver.get("https://www.ebay.com"); // Default URL (replace with your URL)
     }
 
+//    @BeforeTest
+//    public void clearDBLogs() {
+//        TestLogger.clearTestResults();
+//    }
+
+    // @IMP : following code is for attaching screenshot to allure report when test case failed
     @AfterMethod
-    public void logResult(ITestResult result) {
-        String testName = result.getName();
-        String status = result.isSuccess() ? "PASS" : "FAIL";
-        double executionTime = (result.getEndMillis() - result.getStartMillis()) / 1000.0;
-
-        TestLogger.logTestResult(testName, status, executionTime);
-        driver.quit();
+    public void tearDown(ITestResult result) throws InterruptedException, FileNotFoundException {
+        if (ITestResult.FAILURE == result.getStatus()) {
+            System.out.println("Test failed: " + result.getName());
+            Allure.addAttachment(" username", Utility.takeScreenShot());
+        }
+        if (driver != null) {
+            driver.quit();
+        }
     }
 
-    // TODO fix that method
-//    public static String capture(WebDriver driver)throws IOException {
-//        File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-//        File dest = new File("src/../ExceImages/" + System.currentTimeMillis() + ".png");
-//        String errlpath = dest.getAbsolutePath();
-//        FileUtils.copyFile(scrFile, dest);
-//                return errlpath;
+//    @Attachment(value = "Screenshot on Failure", type = "image/png")
+//    public byte[] saveScreenShot() {
+//        if (driver == null) {
+//            System.err.println("Driver is not initialized. Screenshot not taken.");
+//            return new byte[0];
+//        }
+//        try {
+//            return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+//        } catch (Exception e) {
+//            System.err.println("Error capturing screenshot: " + e.getMessage());
+//            return new byte[0];
+//        }
 //    }
 }

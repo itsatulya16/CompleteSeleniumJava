@@ -56,6 +56,25 @@
             <version>5.7.1</version>
         </dependency>
 
+
+
+            <!-- Allure TestNG Integration -->
+            <dependency>
+                <groupId>io.qameta.allure</groupId>
+                <artifactId>allure-testng</artifactId>
+                <version>2.24.0</version> <!-- Use the latest version -->
+            </dependency>
+
+            <!-- TestNG for Test Framework -->
+            <dependency>
+                <groupId>org.testng</groupId>
+                <artifactId>testng</artifactId>
+                <version>7.7.1</version>
+            </dependency>
+
+
+
+
     </dependencies>
     <build>
         <pluginManagement>
@@ -68,6 +87,17 @@
                         <!-- put your configurations here -->
                     </configuration>
                 </plugin>
+                    <plugin>
+                        <groupId>io.qameta.allure</groupId>
+                        <artifactId>allure-maven</artifactId>
+                        <version>2.11.2</version>
+                        <configuration>
+                            <reportVersion>2.24.0</reportVersion>
+                        </configuration>
+                    </plugin>
+
+
+
 <!--                <plugin>-->
 <!--                    <groupId>org.apache.maven.plugins</groupId>-->
 <!--                    <artifactId>maven-surefire-plugin</artifactId>-->
