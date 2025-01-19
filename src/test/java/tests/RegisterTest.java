@@ -25,6 +25,7 @@ public class RegisterTest extends BaseClass {
         String passwordValue = "Test@1234";
 
         /*@Step 1: login to ebay, Expected: login successful*/
+        driver.get("https://www.ebay.com/");
         HomePage homePage = new HomePage();
         homePage.validateEbayOpen();
 
@@ -68,8 +69,9 @@ public class RegisterTest extends BaseClass {
      * Description - validate ebay home page opens
      * */
     @Test
-    public void validateEbaySiteOpens() {
+    public void validateEbaySiteOpens() throws InterruptedException {
         /*@Step 1: launch browser and hit ebay link, Expected: validate ebay home page opens*/
+        driver.get("https://www.ebay.com/");
         HomePage homePage = new HomePage();
         homePage.validateEbayOpen();
     }
