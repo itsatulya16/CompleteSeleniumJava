@@ -15,12 +15,15 @@ public class DatePicker {
     public static void main(String[] args) {
         String dayToSelect = "16";
         String mothWantToSelect = "December";
-        String yearToSelect = "2025";
+        String yearToSelect = "2028";
         WebDriverManager.chromedriver().clearDriverCache().setup();
         WebDriver driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.get("https://www.globalsqa.com/demo-site/datepicker/");
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(2));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//iframe[@class='demo-frame lazyloaded']")));
+
         driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@class='demo-frame lazyloaded']")));
         driver.findElement(By.xpath("//input[@id='datepicker']")).click();
 //get month
