@@ -14,7 +14,7 @@ import java.util.List;
 public class DatePicker {
     public static void main(String[] args) {
         String dayToSelect = "16";
-        String mothWantToSelect = "June";
+        String mothWantToSelect = "December";
         String yearToSelect = "2025";
         WebDriverManager.chromedriver().clearDriverCache().setup();
         WebDriver driver = new ChromeDriver();
@@ -31,7 +31,7 @@ public class DatePicker {
             String month = driver.findElement(By.xpath("//span[@class='ui-datepicker-month']")).getText().trim();
             String year = driver.findElement(By.xpath("//span[@class='ui-datepicker-year']")).getText().trim();
             if (month.equals(mothWantToSelect) && year.equals(yearToSelect)) {
-                List<WebElement> day = driver.findElements(By.xpath("//table[@class='ui-datepicker-calendar']/tbody/tr/td/a"));
+                List<WebElement> day = driver.findElements(By.xpath("//table[@class='ui-datepicker-calendar']/tbody/tr/td"));
                 boolean dayFound = false;
                 for (WebElement d : day) {
                     if (d.getText().trim().equals(dayToSelect)) {

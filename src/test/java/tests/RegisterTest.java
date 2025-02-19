@@ -98,4 +98,13 @@ public class RegisterTest extends BaseClass {
         // Add assertions as needed
         System.out.println("Test executed for: " + desc);
     }
+
+    @Test(description = "validate login with invalid credentials")
+    public void validateLoginWithInvalidCredentials() {
+        fb_page fb = new fb_page();
+        fb.enterUserName("invalidUser");
+        fb.enterPassword("invalidPass");
+        fb.clickLoginButton();
+        fb.validateErrorMessage("The email or mobile number you entered isn’t connected to an account.");
+    }
 }

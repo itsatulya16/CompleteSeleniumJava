@@ -22,4 +22,13 @@ public class fb_page extends BaseClass {
         Assert.assertEquals(tiitle, expected, "title not matches");
     }
 
+    public void clickLoginButton() {
+                Utility.waitForElementVisibility("//button[@name='login']").click();
+            }
+
+    public void validateErrorMessage(String expectedMessage) {
+        String actualMessage = Utility.waitForElementVisibility("//div[contains(@class, 'error_message')]").getText();
+        Assert.assertEquals(actualMessage, expectedMessage, "Error message does not match");
+    }
 }
+
