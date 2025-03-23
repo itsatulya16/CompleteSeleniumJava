@@ -118,6 +118,40 @@
 <!--                <target>11</target>-->
 <!--                    </configuration>-->
 <!--                </plugin>-->
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>3.0.0-M5</version>
+                    <configuration>
+                        <systemPropertyVariables>
+                            <allure.results.directory>target/allure-results</allure.results.directory>
+                        </systemPropertyVariables>
+                    </configuration>
+                </plugin>
+
+<!--                below plugin is used to generate allure report automatically after test execution-->
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>exec-maven-plugin</artifactId>
+                    <version>3.0.0</version>
+                    <executions>
+                        <execution>
+                            <id>allure-report</id>
+                            <phase>verify</phase>
+                            <goals>
+                                <goal>exec</goal>
+                            </goals>
+                            <configuration>
+                                <executable>allure</executable>
+                                <arguments>
+                                    <argument>serve</argument>
+                                    <argument>target/allure-results</argument>
+                                </arguments>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
             </plugins>
         </pluginManagement>
     </build>

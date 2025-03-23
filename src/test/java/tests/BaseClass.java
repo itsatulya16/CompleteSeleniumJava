@@ -7,18 +7,22 @@ import io.qameta.allure.Allure;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 
 import java.io.FileNotFoundException;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 public class BaseClass {
     public static WebDriver driver;
 
     @BeforeMethod
-    public void setUp() {
+    public void setUp() throws MalformedURLException {
         WebDriverManager.chromedriver().clearDriverCache().setup();
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--disable-notifications");
@@ -26,7 +30,14 @@ public class BaseClass {
         options.addArguments("--headless");
         driver = new ChromeDriver(options);
         driver.manage().window().maximize();
-        driver.get("https://www.facebook.com/"); // Default URL (replace with your URL)
+        driver.get("https://www.facebook.com/");
+
+        // to run in docker container --------------------------------------
+//        DesiredCapabilities capabilities = new DesiredCapabilities();
+//        capabilities.setBrowserName("chrome");
+//        driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), capabilities);
+//        driver.manage().window().maximize();
+//        driver.get("https://www.facebook.com/");
     }
 
     @BeforeTest

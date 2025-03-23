@@ -18,7 +18,7 @@ public class RegisterTest extends BaseClass {
      * Description - validate registration fields with valid credentials
      * */
     @Test
-    public void validatePersonalRegistrationWithValidCredentials() {
+    public void validatePersonalRegistrationWithValidCredentials() throws InterruptedException {
         String firstNameValue = "Atul";
         String lastNameValue = "Automation Tester";
         String emailValue = "Atul@gmail.com";
@@ -26,6 +26,7 @@ public class RegisterTest extends BaseClass {
 
         /*@Step 1: login to ebay, Expected: login successful*/
         driver.get("https://www.ebay.com/");
+        Thread.sleep(180000);
         HomePage homePage = new HomePage();
         homePage.validateEbayOpen();
 
