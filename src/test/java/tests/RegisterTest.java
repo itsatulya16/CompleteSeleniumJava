@@ -26,7 +26,6 @@ public class RegisterTest extends BaseClass {
 
         /*@Step 1: login to ebay, Expected: login successful*/
         driver.get("https://www.ebay.com/");
-        Thread.sleep(180000);
         HomePage homePage = new HomePage();
         homePage.validateEbayOpen();
 

@@ -48,10 +48,21 @@ public class BaseClass {
     // @IMP : following code is for attaching screenshot to allure report when test case failed
     @AfterMethod
     public void tearDown(ITestResult result) throws InterruptedException, FileNotFoundException {
+        String status;
         if (ITestResult.FAILURE == result.getStatus()) {
+            status = "FAILURE";
             System.out.println("Test failed: " + result.getName());
             Allure.addAttachment(result.getName(), Utility.takeScreenShot());
+        } else if (ITestResult.SUCCESS == result.getStatus()) {
+            status = "SUCCESS";
+            System.out.println("Test passed: " + result.getName());
+        } else {
+            status = "SKIPPED";
+            System.out.println("Test skipped: " + result.getName());
+
         }
+        // follwing code will log the test result logs in DB
+        TestLogger.logTestResult(result.getName(), status, (result.getEndMillis() - result.getStartMillis()) / 1000.0);
         if (driver != null) {
             driver.quit();
         }

@@ -31,7 +31,7 @@ public class Utility extends BaseClass {
             throw new IllegalArgumentException("XPath cannot be null or empty");
         }
         Wait<WebDriver> wait = new FluentWait<>(driver)
-                .withTimeout(Duration.ofSeconds(20))
+                .withTimeout(Duration.ofSeconds(5))
                 .pollingEvery(Duration.ofMillis(2))
                 .ignoring(NoSuchElementException.class);
         return wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(xpath)));
@@ -45,7 +45,7 @@ public class Utility extends BaseClass {
             throw new IllegalArgumentException("XPath cannot be null or empty");
         }
         Wait<WebDriver> wait = new FluentWait<>(driver)
-                .withTimeout(Duration.ofSeconds(20))
+                .withTimeout(Duration.ofSeconds(5))
                 .pollingEvery(Duration.ofMillis(2))
                 .ignoring(NoSuchElementException.class);
         return wait.until(ExpectedConditions.elementToBeClickable(By.xpath(xpath)));
