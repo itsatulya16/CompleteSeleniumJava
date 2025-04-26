@@ -5,6 +5,7 @@ import Pages.RegisterPage;
 import Pages.fb_page;
 import Utils.MyListnerSetUp;
 import org.openqa.selenium.By;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
@@ -13,6 +14,14 @@ import static Pages.RegisterPage.*;
 //@Listeners(MyListnerSetUp.class)
 public class RegisterTest extends BaseClass {
 
+
+
+
+
+    @BeforeClass
+    public void check(){
+        System.out.println("Before class");
+    }
     /*
      * @author - Atul Ambade
      * Description - validate registration fields with valid credentials

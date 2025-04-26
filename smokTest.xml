@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="smokTest" parallel="tests" thread-count="2">
+    <listeners>
+        <listener class-name="io.qameta.allure.testng.AllureTestNg" />
+    </listeners>
+
+    <test verbose="2" preserve-order="true" name="D:/Automation_Projects/completeSelenium/src/test">
+        <parameter name="allure.results.directory" value="target/allure-results"/>
+        <classes>
+            <class name="tests.validationTest"></class>
+<!--                        <class name="tests.RegisterTest"></class>-->
+        </classes>
+    </test>
+</suite>
