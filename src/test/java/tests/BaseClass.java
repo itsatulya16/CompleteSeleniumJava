@@ -7,6 +7,9 @@ import io.qameta.allure.Allure;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.ITestResult;
@@ -23,12 +26,21 @@ public class BaseClass {
 
     @BeforeMethod
     public void setUp() throws MalformedURLException {
-        WebDriverManager.chromedriver().clearDriverCache().setup();
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--disable-notifications");
-        options.addArguments("--disable-popup-blocking");
+//        WebDriverManager.chromedriver().clearDriverCache().setup();
+//        ChromeOptions options = new ChromeOptions();
+//        options.addArguments("--disable-notifications");
+//        options.addArguments("--disable-popup-blocking");
+//        options.addArguments("--headless");
+//        driver = new ChromeDriver(options);
+
+//        WebDriverManager.firefoxdriver().clearDriverCache().setup();
+        System.setProperty("webdriver.gecko.driver", "/snap/bin/geckodriver");
+
+        FirefoxOptions options = new FirefoxOptions();
         options.addArguments("--headless");
-        driver = new ChromeDriver(options);
+
+        driver = new FirefoxDriver(options);
+
         driver.manage().window().maximize();
         driver.get("https://www.facebook.com/");
 

@@ -23,6 +23,7 @@ public class validationTest extends BaseClass {
 
     }
 
+
     @Step("entering password")
     @Test(description = "validate username entered in textBox")
     public void validatePasswordEntered() throws FileNotFoundException {
