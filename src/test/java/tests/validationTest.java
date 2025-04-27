@@ -18,7 +18,7 @@ public class validationTest extends BaseClass {
     public void validateUserNameEntered() throws FileNotFoundException {
         fb_page fb = new fb_page();
 //        Allure.addAttachment("entering username", Utility.takeScreenShot());
-        fb.validateTitle("Facebook – log in or sign up");
+        fb.validateTitle("Facebook ? log in or sign up");
         fb.enterUserName("bala");
 
     }
