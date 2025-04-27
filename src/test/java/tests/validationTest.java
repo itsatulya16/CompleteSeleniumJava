@@ -25,7 +25,7 @@ public class validationTest extends BaseClass {
 
 
     @Step("entering password")
-   // @Test(description = "validate username entered in textBox")
+    @Test(description = "validate username entered in textBox")
     public void validatePasswordEntered() throws FileNotFoundException {
         fb_page fb = new fb_page();
 //        Allure.addAttachment("entering passWord", Utility.takeScreenShot());
