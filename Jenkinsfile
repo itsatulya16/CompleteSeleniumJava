@@ -31,7 +31,7 @@ pipeline {
         }
         stage('Generate Allure Report') {
                     steps {
-                        bat 'mvn allure:report'
+                        bat 'allure generate --single-file allure-results'
                     }
                 }
     }
@@ -60,7 +60,7 @@ post {
             allowMissing: false,
             alwaysLinkToLastBuild: false,
             keepAll: false,
-            reportDir: 'target/site/allure-maven-plugin',
+            reportDir: 'target/allure-report',
             reportFiles: 'index.html',
             reportName: 'Allure Test Report',
             reportTitles: ''
