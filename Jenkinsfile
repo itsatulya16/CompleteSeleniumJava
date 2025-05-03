@@ -31,8 +31,8 @@ pipeline {
 
         stage('Generate Allure Report') {
             steps {
-            bat 'cd target'
-                bat 'allure generate allure-results -o allure-report --clean'
+          bat 'mvn allure:aggregate'
+          bat 'allure generate target/allure-results -o target/allure-report'
             }
         }
     }
