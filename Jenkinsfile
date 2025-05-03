@@ -43,7 +43,7 @@ pipeline {
                 allowMissing: false,
                 alwaysLinkToLastBuild: false,
                 keepAll: false,
-                reportDir: 'target/allure-report',
+                reportDir: 'target/surefire-reports',  // Directory where the test reports are generated, we can chnage to target/allure-report
                 reportFiles: 'index.html',
                 reportName: 'Allure Test Report',
                 reportTitles: ''
