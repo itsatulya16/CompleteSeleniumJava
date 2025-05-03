@@ -29,10 +29,18 @@ pipeline {
             }
         }
 
-        stage('Generate Allure Report') {
+//         stage('Generate Allure Report') {
+//             steps {
+//           bat 'mvn allure:aggregate'
+//           bat 'allure generate target/allure-results -o target/allure-report'
+//             }
+
+stage('Generate Allure Report') {
             steps {
-          bat 'mvn allure:aggregate'
-          bat 'allure generate target/allure-results -o target/allure-report'
+                dir('target') {
+                    bat 'allure generate --single-file allure-results'
+                }
+
             }
         }
     }
@@ -43,7 +51,7 @@ pipeline {
                 allowMissing: false,
                 alwaysLinkToLastBuild: false,
                 keepAll: false,
-                reportDir: 'target/surefire-reports',  // Directory where the test reports are generated, we can chnage to target/allure-report
+                reportDir: 'target/allure-report',  // Directory where the test reports are generated, we can chnage to target/allure-report
                 reportFiles: 'index.html',
                 reportName: 'Allure Test Report',
                 reportTitles: ''
