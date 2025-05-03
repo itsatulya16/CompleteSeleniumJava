@@ -1,9 +1,15 @@
 pipeline {
     agent any
 
-    tools {
-        jdk "jdk"
-        maven "3.9.6"
+//     tools {
+//         jdk "jdk"
+//         maven "3.9.6"
+//     }
+
+ environment {
+        JAVA_HOME = "/C:/Program Files/Java/jdk-17"   // Replace with your Java installation path
+        MAVEN_HOME = "/C:/Program Files/apache-maven-3.9.6-bin/apache-maven-3.9.6" // Replace with your Maven installation path
+        PATH = "${JAVA_HOME}/bin:${MAVEN_HOME}/bin:${env.PATH}"
     }
 
     stages {
