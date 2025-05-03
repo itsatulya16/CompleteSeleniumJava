@@ -9,6 +9,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.ITestResult;
@@ -24,20 +25,30 @@ public class BaseClass {
     public static WebDriver driver;
 
     @BeforeMethod
-    public void setUp() throws MalformedURLException {
-//        WebDriverManager.chromedriver().clearDriverCache().setup();
-//        ChromeOptions options = new ChromeOptions();
-//        options.addArguments("--disable-notifications");
-//        options.addArguments("--disable-popup-blocking");
-//        options.addArguments("--headless");
-//        driver = new ChromeDriver(options);
+    public void setUp() {
+        try {
+            System.setProperty("webdriver.gecko.driver", "/snap/bin/geckodriver");
 
-        WebDriverManager.firefoxdriver().clearDriverCache().setup();
-        FirefoxOptions options = new FirefoxOptions();
-        options.addArguments("--disable-notifications");
-        options.addArguments("--disable-popup-blocking");
-        options.addArguments("--headless");
-        driver = new FirefoxDriver(options);
+            FirefoxOptions options = new FirefoxOptions();
+            options.addArguments("--headless");
+            options.addArguments("--disable-notifications");
+            options.addArguments("--disable-popup-blocking");
+
+            driver = new FirefoxDriver(options);
+        } catch (Exception e) {
+            System.out.println("Error in setting up Firefox driver: " + e.getMessage());
+            System.out.println("Switching to Chrome driver");
+        }
+        try {
+            WebDriverManager.chromedriver().clearDriverCache().setup();
+            ChromeOptions options = new ChromeOptions();
+            options.addArguments("--disable-notifications");
+            options.addArguments("--disable-popup-blocking");
+            driver = new ChromeDriver(options);
+            System.out.println("Chrome driver setup successfully");
+        } catch (Exception e) {
+            System.out.println("Error in setting up Chrome driver: " + e.getMessage());
+        }
 
         driver.manage().window().maximize();
         driver.get("https://www.facebook.com/");
