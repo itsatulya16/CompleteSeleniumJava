@@ -39,6 +39,7 @@ stage('Generate Allure Report') {
             steps {
                 dir('target') {
                     bat 'allure generate --single-file allure-results'
+                    emailext attachmentsPattern: 'allure-report\\index.html', body: 'hey plz check', subject: 'allure report', to: 'atulambadepatil@gmail.com'
                 }
 
             }
