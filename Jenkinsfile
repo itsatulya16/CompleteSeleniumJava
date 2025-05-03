@@ -14,7 +14,7 @@ pipeline {
         stage('Test Execute') {
             steps {
                 catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE') {
-                    bat 'mvn clean test -Dallure.results.directory=allure-results'
+                    bat 'mvn clean test -Dallure.results.directory=allure-results'  // after adding this line i can see allure reports in jenkjns
                 }
             }
         }
