@@ -37,6 +37,11 @@ pipeline {
             }
 
     }
+    stage('Archive Artifacts') {
+                steps {
+                    archiveArtifacts artifacts: 'target/allure-report/index.html', fingerprint: true
+                }
+            }
     }
 
     post {
