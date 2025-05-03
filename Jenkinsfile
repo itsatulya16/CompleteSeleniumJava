@@ -31,7 +31,7 @@ pipeline {
 
         stage('Generate Allure Report') {
             steps {
-     dir('. /target'){
+     dir('./target'){
           bat 'allure generate --single-file allure-results'
           }
             }
