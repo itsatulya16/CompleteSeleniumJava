@@ -39,7 +39,6 @@ pipeline {
 
         stage('Archive Artifacts') {
             steps {
-                // Archive the whole folder so CSS/JS also get stored
                 archiveArtifacts artifacts: 'target/allure-report/**', fingerprint: true
             }
         }
@@ -47,14 +46,12 @@ pipeline {
 
     post {
         always {
-            publishHTML([
-                allowMissing: false,
-                alwaysLinkToLastBuild: false,
-                keepAll: true,  // (optional) if you want to keep history of reports
-                reportDir: 'target/allure-report',
-                reportFiles: 'index.html',
-                reportName: 'Allure Test Report',
-                reportTitles: ''
+            // ADD THIS
+            allure([
+                includeProperties: false,
+                jdk: '',
+                reportBuildPolicy: 'ALWAYS',
+                results: [[path: 'allure-results']]
             ])
         }
     }
