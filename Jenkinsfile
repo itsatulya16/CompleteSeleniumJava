@@ -9,22 +9,13 @@ pipeline {
     }
 
     stages {
-        stage('Clean Up') {
-            steps {
-                bat 'mvn -B -DskipTests clean package'
-            }
-        }
 
-        stage('Code Compile') {
-            steps {
-                bat 'mvn compile'
-            }
-        }
 
         stage('Test Execute') {
             steps {
                 catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE') {
-                    bat 'mvn test'
+                    bat 'bat 'mvn clean test -Dallure.results.directory=allure-results'
+'
                 }
             }
         }
