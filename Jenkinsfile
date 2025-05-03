@@ -6,18 +6,11 @@ pipeline {
 //         maven "3.9.6"
 //     }
 
-//  environment {
-// //      JAVA_HOME = "C:\\Program Files\\Java\\jdk-17"
-// //      MAVEN_HOME = "C:\\Program Files\\apache-maven-3.9.6-bin\\apache-maven-3.9.6"
-// //      PATH = "${JAVA_HOME}\\bin;${MAVEN_HOME}\\bin;${env.PATH}"
-// }
-environment {
-    JAVA_HOME = "${env.JAVA_HOME}"
-    MAVEN_HOME = "${env.MAVEN_HOME}"
-    PATH = "${env.PATH}"
+ environment {
+     JAVA_HOME = "C:\\Program Files\\Java\\jdk-17"
+     MAVEN_HOME = "C:\\Program Files\\apache-maven-3.9.6-bin\\apache-maven-3.9.6"
+     PATH = "${JAVA_HOME}\\bin;${MAVEN_HOME}\\bin;${env.PATH}"
 }
-
-
 
     stages {
 
