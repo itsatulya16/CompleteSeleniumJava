@@ -42,7 +42,7 @@ pipeline {
                 allowMissing: false,
                 alwaysLinkToLastBuild: false,
                 keepAll: false,
-                reportDir: 'target/allure-report',
+                reportDir: 'target/surefire-reports',
                 reportFiles: 'index.html',
                 reportName: 'Allure Test Report',
                 reportTitles: ''
