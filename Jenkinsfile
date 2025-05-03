@@ -15,7 +15,6 @@ pipeline {
             steps {
                 catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE') {
                     bat 'mvn clean test -Dallure.results.directory=allure-results'
-'
                 }
             }
         }
