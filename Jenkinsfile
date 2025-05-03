@@ -31,7 +31,8 @@ pipeline {
 
         stage('Generate Allure Report') {
             steps {
-                bat 'allure generate target/allure-results -o target/allure-report --clean'
+            bat 'cd target'
+                bat 'allure generate allure-results -o allure-report --clean'
             }
         }
     }
@@ -42,7 +43,7 @@ pipeline {
                 allowMissing: false,
                 alwaysLinkToLastBuild: false,
                 keepAll: false,
-                reportDir: 'target/surefire-reports',
+                reportDir: 'target/allure-reports',
                 reportFiles: 'index.html',
                 reportName: 'Allure Test Report',
                 reportTitles: ''
