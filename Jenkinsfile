@@ -10,6 +10,11 @@ pipeline {
 
     stages {
 
+stage('Clean Workspace') {  // 🧹 Clean workspace stage
+            steps {
+                cleanWs()  // Jenkins pipeline built-in function
+            }
+        }
 
         stage('Test Execute') {
             steps {
