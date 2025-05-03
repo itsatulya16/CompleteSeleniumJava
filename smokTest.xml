@@ -9,8 +9,7 @@
     <test name="Validation Tests">
         <classes>
             <class name="tests.validationTest" />
-            <!-- Uncomment the line below if needed -->
-            <!-- <class name="tests.RegisterTest" /> -->
+             <class name="tests.RegisterTest" />
         </classes>
     </test>
 </suite>
