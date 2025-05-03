@@ -29,7 +29,7 @@ pipeline {
 
         stage('Archive Artifacts') {
             steps {
-                archiveArtifacts artifacts: 'target/allure-results/**', fingerprint: true
+                archiveArtifacts artifacts: 'target/allure-report/**', fingerprint: true
             }
         }
     }
