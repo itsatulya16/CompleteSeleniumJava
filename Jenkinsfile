@@ -31,17 +31,18 @@ pipeline {
 
         stage('Generate Allure Report') {
             steps {
-     dir('./target'){
-          bat 'allure generate --single-file allure-results'
-          }
-            }
-
-    }
-    stage('Archive Artifacts') {
-                steps {
-                    archiveArtifacts artifacts: 'target/allure-report/index.html', fingerprint: true
+                dir('target') {
+                    bat 'allure generate ../allure-results --clean -o allure-report'
                 }
             }
+        }
+
+        stage('Archive Artifacts') {
+            steps {
+                // Archive the whole folder so CSS/JS also get stored
+                archiveArtifacts artifacts: 'target/allure-report/**', fingerprint: true
+            }
+        }
     }
 
     post {
@@ -49,8 +50,8 @@ pipeline {
             publishHTML([
                 allowMissing: false,
                 alwaysLinkToLastBuild: false,
-                keepAll: false,
-                reportDir: 'target/allure-report',  // Directory where the test reports are generated, we can chnage to target/allure-report
+                keepAll: true,  // (optional) if you want to keep history of reports
+                reportDir: 'target/allure-report',
                 reportFiles: 'index.html',
                 reportName: 'Allure Test Report',
                 reportTitles: ''
