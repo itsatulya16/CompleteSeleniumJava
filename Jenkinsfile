@@ -4,7 +4,7 @@ pipeline {
  environment {
      JAVA_HOME = "C:\\Program Files\\Java\\jdk-17"
      MAVEN_HOME = "C:\\Program Files\\apache-maven-3.9.6-bin\\apache-maven-3.9.6"
-     ALLURE_HOME = "C:\allure-2.32.0\allure-2.32.0"
+     ALLURE_HOME = "C:\\allure-2.32.0\\allure-2.32.0"
      PATH = "${JAVA_HOME}\\bin;${MAVEN_HOME}\\bin;${ALLURE_HOME}\\bin;${env.PATH}"
 }
 
