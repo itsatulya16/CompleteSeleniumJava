@@ -29,19 +29,13 @@ pipeline {
             }
         }
 
-//         stage('Generate Allure Report') {
-//             steps {
-//           bat 'mvn allure:aggregate'
-//           bat 'allure generate target/allure-results -o target/allure-report'
-//             }
-
-stage('Generate Allure Report') {
+        stage('Generate Allure Report') {
             steps {
-                dir('target') {
-                bat 'allure includeProperties: false, jdk: \'\', results: [[path: \'allure-results\']]'                }
-
+     dir('/target'){
+          bat 'allure generate --single-file allure-results'
+          }
             }
-        }
+
     }
 
     post {
