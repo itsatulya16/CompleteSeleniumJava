@@ -1,41 +1,53 @@
 pipeline {
     agent { label 'vm' }
 
-    tools {
-        jdk "jdk"
-        maven "3.9.6"
+    environment {
+        JAVA_HOME = "C:\\Program Files\\Java\\jdk-17"
+        MAVEN_HOME = "C:\\Program Files\\apache-maven-3.9.6-bin\\apache-maven-3.9.6"
+        ALLURE_HOME = "C:\\allure-2.32.0\\allure-2.32.0"
+        PATH = "${JAVA_HOME}\\bin;${MAVEN_HOME}\\bin;${ALLURE_HOME}\\bin;${env.PATH}"
     }
 
     stages {
 
-        stage('clean up') {
-            steps {
-                bat 'mvn -B -DskipTests clean package'
-            }
-        }
+// stage('Clean Workspace') {  // 🧹 Clean workspace stage
+//             steps {
+//                 cleanWs()  // Jenkins pipeline built-in function
+//             }
+//         }
 
-        stage('code compile') {
-            steps {
-                bat "mvn compile"
-            }
-        }
-
-        stage('test execute') {
+        stage('Test Execute') {
             steps {
                 catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE') {
-                    bat "mvn test"
+                    bat 'mvn clean test -Dallure.results.directory=allure-results'  // after adding this line i can see allure reports in jenkjns
                 }
+            }
+        }
+
+        stage('Generate Allure Report') {
+            steps {
+                dir('target') {
+                    bat 'allure generate ../allure-results --clean -o allure-report'
+                }
+            }
+        }
+
+        stage('Archive Artifacts') {
+            steps {
+                archiveArtifacts artifacts: 'target/allure-report/**', fingerprint: true
             }
         }
     }
 
     post {
         always {
-            // Publish HTML report even if the test stage failed
-            publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'Reports', reportFiles: 'Spark.html', reportName: 'ExtentHTMLReport', reportTitles: '', useWrapperFileDirectly: true])
-
-            // Clean workspace
-            cleanWs()
+            // ADD THIS
+            allure([
+                includeProperties: false,
+                jdk: '',
+                reportBuildPolicy: 'ALWAYS',
+                results: [[path: 'allure-results']]
+            ])
         }
     }
 }
