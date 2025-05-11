@@ -5,3 +5,4 @@
 target/
 testng.xml
 Reports/
+driver/
