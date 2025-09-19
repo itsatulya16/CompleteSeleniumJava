@@ -1,0 +1,13 @@
+
+
+services:
+  chrome:
+    image: selenium/standalone-chrome
+    container_name: standalone-chrome
+    ports:
+      - "4444:4444"   # Selenium WebDriver endpoint
+      - "7900:7900"   # VNC viewer (for UI debugging)
+    shm_size: "1gb"
+    environment:
+      - SE_NODE_MAX_SESSIONS=5
+      - SE_NODE_SESSION_TIMEOUT=300
