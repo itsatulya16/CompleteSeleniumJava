@@ -26,39 +26,40 @@ public class BaseClass {
 
     @BeforeMethod
     public void setUp() throws MalformedURLException {
-//       try {
-//           System.setProperty("webdriver.gecko.driver", "/snap/bin/geckodriver");
-//
-//           FirefoxOptions options = new FirefoxOptions();
-//           options.addArguments("--headless");
-//           options.addArguments("--disable-notifications");
-//           options.addArguments("--disable-popup-blocking");
-//
-//           driver = new FirefoxDriver(options);
-//       } catch (Exception e) {
-//           System.out.println("Error in setting up Firefox driver: " + e.getMessage());
-//           System.out.println("Switching to Chrome driver");
-//       }
-//       try {
-//           WebDriverManager.chromedriver().clearDriverCache().setup();
-//           ChromeOptions options = new ChromeOptions();
-//           options.addArguments("--disable-notifications");
-//           options.addArguments("--disable-popup-blocking");
-//           driver = new ChromeDriver(options);
-//           System.out.println("Chrome driver setup successfully");
-//       } catch (Exception e) {
-//           System.out.println("Error in setting up Chrome driver: " + e.getMessage());
-//       }
-//
-//       driver.manage().window().maximize();
-//       driver.get("https://www.facebook.com/");
+       try {
+           System.setProperty("webdriver.gecko.driver", "/snap/bin/geckodriver");
+
+           FirefoxOptions options = new FirefoxOptions();
+           options.addArguments("--headless");
+           options.addArguments("--disable-notifications");
+           options.addArguments("--disable-popup-blocking");
+
+           driver = new FirefoxDriver(options);
+       } catch (Exception e) {
+           System.out.println("Error in setting up Firefox driver: " + e.getMessage());
+           System.out.println("Switching to Chrome driver");
+       }
+       try {
+           WebDriverManager.chromedriver().clearDriverCache().setup();
+           ChromeOptions options = new ChromeOptions();
+           options.addArguments("--disable-notifications");
+           options.addArguments("--disable-popup-blocking");
+           options.addArguments("--headless");
+           driver = new ChromeDriver(options);
+           System.out.println("Chrome driver setup successfully");
+       } catch (Exception e) {
+           System.out.println("Error in setting up Chrome driver: " + e.getMessage());
+       }
+
+       driver.manage().window().maximize();
+       driver.get("https://www.facebook.com/");
 
          //to run in docker container --------------------------------------
-         DesiredCapabilities capabilities = new DesiredCapabilities();
-         capabilities.setBrowserName("chrome");
-         driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), capabilities);
-         driver.manage().window().maximize();
-         driver.get("https://www.facebook.com/");
+//         DesiredCapabilities capabilities = new DesiredCapabilities();
+//         capabilities.setBrowserName("chrome");
+//         driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), capabilities);
+//         driver.manage().window().maximize();
+//         driver.get("https://www.facebook.com/");
     }
 
     @BeforeTest
@@ -83,6 +84,7 @@ public class BaseClass {
 
         }
         // follwing code will log the test result logs in DB
+
         TestLogger.logTestResult(result.getName(), status, (result.getEndMillis() - result.getStartMillis()) / 1000.0);
         if (driver != null) {
             driver.quit();
