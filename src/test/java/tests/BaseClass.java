@@ -35,55 +35,62 @@ public class BaseClass {
 
     @BeforeMethod
     public void setUp() {
-
-        try {
-            //to run in docker container --------------------------------------
-            DesiredCapabilities capabilities = new DesiredCapabilities();
-            capabilities.setBrowserName("chrome");
-            driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), capabilities);
-
-        } catch (Exception e) {
-
-            log.warn("docker is not ready{}", e.getMessage());
-
-
-
-            try {
-                System.setProperty("webdriver.gecko.driver", "/snap/bin/geckodriver");
-
-                FirefoxOptions options = new FirefoxOptions();
-                options.addArguments("--headless");
-                options.addArguments("--disable-notifications");
-                options.addArguments("--disable-popup-blocking");
-
-                driver = new FirefoxDriver(options);
-            } catch (Exception f) {
-
-                log.warn("Error in setting up Firefox driver: {}", f.getMessage());
-
-                log.info("Switching to Chrome driver");
+        String browser = Utility.getValue("browser");
+        switch (browser) {
+            case "chrome":
                 try {
                     WebDriverManager.chromedriver().clearDriverCache().setup();
                     ChromeOptions options = new ChromeOptions();
                     options.addArguments("--disable-notifications");
                     options.addArguments("--disable-popup-blocking");
-                    if (Boolean.parseBoolean(Utility.getValue("headless"))){
+                    if (Boolean.parseBoolean(Utility.getValue("headless"))) {
                         options.addArguments("--headless");
                     }
 
                     driver = new ChromeDriver(options);
 
                     log.info("Chrome driver setup successfully");
-                } catch (Exception d) {
-
-                    log.warn("Error in setting up Chrome driver: {}", d.getMessage());
+                } catch (Exception e) {
+                    log.error("chrome is not launched {}", e.getMessage());
                 }
-            }
-            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
-            driver.manage().window().maximize();
-            driver.get("https://www.facebook.com/");
 
+                break;
+
+            case "docker":
+                try {
+                    //to run in docker container --------------------------------------
+                    DesiredCapabilities capabilities = new DesiredCapabilities();
+                    capabilities.setBrowserName("chrome");
+                    driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), capabilities);
+
+                } catch (Exception e) {
+
+                    log.warn("docker is not ready{}", e.getMessage());
+
+                }
+                break;
+            case "fireFox":
+                try {
+                    System.setProperty("webdriver.gecko.driver", "/snap/bin/geckodriver");
+
+                    FirefoxOptions options = new FirefoxOptions();
+                    if (Boolean.parseBoolean(Utility.getValue("headless"))) {
+                        options.addArguments("--headless");
+                    }
+                    options.addArguments("--disable-notifications");
+                    options.addArguments("--disable-popup-blocking");
+
+                    driver = new FirefoxDriver(options);
+                } catch (Exception f) {
+
+                    log.warn("Error in setting up Firefox driver: {}", f.getMessage());
+                }
+            default:
+                log.error("no browser set up found");
+                break;
         }
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        driver.get("https://www.facebook.com");
     }
 
 
