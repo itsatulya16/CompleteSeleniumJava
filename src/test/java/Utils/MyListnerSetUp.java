@@ -28,6 +28,7 @@ public class MyListnerSetUp implements ITestListener {
      * @param context The test context
      */
     public void onStart(ITestContext context) {
+        System.out.println("test started ...............");
         configureReports();
     }
 

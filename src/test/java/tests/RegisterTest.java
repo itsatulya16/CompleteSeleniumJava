@@ -11,7 +11,7 @@ import org.testng.annotations.Test;
 
 import static Pages.RegisterPage.*;
 
-//@Listeners(MyListnerSetUp.class)
+@Listeners(MyListnerSetUp.class)
 public class RegisterTest extends BaseClass {
 
 

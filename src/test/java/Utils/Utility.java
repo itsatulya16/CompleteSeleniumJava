@@ -10,7 +10,9 @@ import tests.BaseClass;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.time.Duration;
+import java.util.Properties;
 
 public class Utility extends BaseClass {
     /*
@@ -56,5 +58,24 @@ public class Utility extends BaseClass {
         TakesScreenshot screenshot = (TakesScreenshot) driver;
         File srcFile = screenshot.getScreenshotAs(OutputType.FILE);
         return new FileInputStream(srcFile);
+    }
+
+    // this methos is for fetching value from properties file
+    public static String getValue(String value) {
+        Properties properties = new Properties();
+        FileInputStream fs = null;
+        try {
+            fs = new FileInputStream("config/selenium.properties");
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        try {
+            properties.load(fs);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        return properties.getProperty(value);
+
     }
 }

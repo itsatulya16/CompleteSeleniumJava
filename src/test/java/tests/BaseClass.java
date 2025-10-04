@@ -4,8 +4,11 @@ import DB_Testing.TestLogger;
 import Utils.Utility;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import io.qameta.allure.Allure;
+import io.qameta.allure.Attachment;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -64,7 +67,10 @@ public class BaseClass {
                     ChromeOptions options = new ChromeOptions();
                     options.addArguments("--disable-notifications");
                     options.addArguments("--disable-popup-blocking");
-                    options.addArguments("--headless");
+                    if (Boolean.parseBoolean(Utility.getValue("headless"))){
+                        options.addArguments("--headless");
+                    }
+
                     driver = new ChromeDriver(options);
 
                     log.info("Chrome driver setup successfully");
@@ -78,7 +84,6 @@ public class BaseClass {
             driver.get("https://www.facebook.com/");
 
         }
-
     }
 
 
@@ -115,17 +120,17 @@ public class BaseClass {
 
 
 
-//    @Attachment(value = "Screenshot on Failure", type = "image/png")
-//    public byte[] saveScreenShot() {
-//        if (driver == null) {
-//            System.err.println("Driver is not initialized. Screenshot not taken.");
-//            return new byte[0];
-//        }
-//        try {
-//            return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
-//        } catch (Exception e) {
-//            System.err.println("Error capturing screenshot: " + e.getMessage());
-//            return new byte[0];
-//        }
-//    }
+    @Attachment(value = "Screenshot on Failure", type = "image/png")
+    public byte[] saveScreenShot() {
+        if (driver == null) {
+            System.err.println("Driver is not initialized. Screenshot not taken.");
+            return new byte[0];
+        }
+        try {
+            return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+        } catch (Exception e) {
+            System.err.println("Error capturing screenshot: " + e.getMessage());
+            return new byte[0];
+        }
+    }
 }

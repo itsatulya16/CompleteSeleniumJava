@@ -4,6 +4,7 @@
 <suite name="smokTest" parallel="false" thread-count="1">
     <listeners>
         <listener class-name="io.qameta.allure.testng.AllureTestNg" />
+<!--        <listener class-name="Utils.MyListnerSetUp"></listener>-->
     </listeners>
 
     <test name="Validation Tests">
