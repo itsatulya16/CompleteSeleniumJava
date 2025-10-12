@@ -18,42 +18,44 @@ public class RegisterPage {
     public static String password = "//input[contains(@id,'password')]";
     public static String registerButton = "//button[contains(@id,'EMAIL_REG_FORM_SUBMIT')]";
 
+    Utility utility = new Utility();
+
     public void clickOnRegisterLink() {
-        Utility.waitForElementVisibility(registerLink).click();
+        utility.waitForElementVisibility(registerLink).click();
     }
 
     public void validateRegisterPageOpens() {
-        Assert.assertTrue(Utility.waitForElementVisibility(creatAccount).isDisplayed(), "Registration page not open");
+        Assert.assertTrue(utility.waitForElementVisibility(creatAccount).isDisplayed(), "Registration page not open");
     }
 
-    public static void validateRadioOptionsDisplay(String... radioOptions) {
+    public void validateRadioOptionsDisplay(String... radioOptions) {
         SoftAssert softAssert = new SoftAssert();
-        Arrays.asList(radioOptions).forEach(option -> softAssert.assertTrue(Utility.waitForElementVisibility(option).isDisplayed(),
+        Arrays.asList(radioOptions).forEach(option -> softAssert.assertTrue(utility.waitForElementVisibility(option).isDisplayed(),
                 String.format("the %s radio option is not displayed", option)));
         softAssert.assertAll();
     }
 
     public void selectRadioOption(String option) {
-        boolean selected = Utility.waitForElementVisibility(option).isSelected();
+        boolean selected = utility.waitForElementVisibility(option).isSelected();
         if (!selected) {
-            Utility.waitForElementVisibility(option).click();
+            utility.waitForElementVisibility(option).click();
         }
     }
 
     public void validateFieldsDisplay(String... fields) {
         SoftAssert softAssert = new SoftAssert();
-        Arrays.asList(fields).forEach(field -> softAssert.assertTrue(Utility.waitForElementVisibility(field).isDisplayed(),
+        Arrays.asList(fields).forEach(field -> softAssert.assertTrue(utility.waitForElementVisibility(field).isDisplayed(),
                 String.format("the %s is not displayed", field)));
 
     }
 
     public void enterValue(String fieldName, String value) {
-        Utility.waitForElementVisibility(fieldName).clear();
-        Utility.waitForElementVisibility(fieldName).sendKeys(value);
+        utility.waitForElementVisibility(fieldName).clear();
+        utility.waitForElementVisibility(fieldName).sendKeys(value);
     }
 
     public void validateFormRegisterButtonEnable() {
-        boolean enable = Utility.waitForElementToBeClickable(registerButton).isEnabled();
+        boolean enable = utility.waitForElementToBeClickable(registerButton).isEnabled();
         Assert.assertTrue(enable, "Register button is not enable");
     }
 }

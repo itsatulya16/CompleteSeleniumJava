@@ -8,22 +8,23 @@ public class HomePage {
     public static String username = "//*[@id='email']";
     public static String passWord = "//*[@id='pass']";
     public static String ebaySearchBox = "//input[@id='gh-ac']";
+    Utility utility = new Utility();
 
-    public static void setUsername() {
-        Utility.waitForElementVisibility(username).sendKeys("atul");
+    public void setUsername() {
+        utility.waitForElementVisibility(username).sendKeys("atul");
     }
 
-    public static void setPassWord() {
-        Utility.waitForElementVisibility(passWord).sendKeys("test");
+    public void setPassWord() {
+        utility.waitForElementVisibility(passWord).sendKeys("test");
     }
 
     public void validateEbayOpen() {
-        boolean ebayOpen = Utility.waitForElementVisibility(ebaySearchBox).isDisplayed();
+        boolean ebayOpen = utility.waitForElementVisibility(ebaySearchBox).isDisplayed();
         Assert.assertTrue(!ebayOpen, "Not landed on correct page");
     }
 
     public void searchItem(String item) {
-        Utility.waitForElementVisibility(ebaySearchBox).sendKeys(item);
-        Utility.waitForElementVisibility(ebaySearchBox).sendKeys(Keys.ENTER);
+        utility.waitForElementVisibility(ebaySearchBox).sendKeys(item);
+        utility.waitForElementVisibility(ebaySearchBox).sendKeys(Keys.ENTER);
     }
 }

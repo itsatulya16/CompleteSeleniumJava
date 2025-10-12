@@ -29,12 +29,32 @@ public class validationTest extends BaseClass {
 
 
     @Step("entering password")
-    @Test(description = "validate username entered in textBox")
+    @Test(description = "validate password entered in textBox")
     public void validatePasswordEntered() throws FileNotFoundException {
         fb_page fb = new fb_page();
 //        Allure.addAttachment("entering passWord", Utility.takeScreenShot());
         logger.info("entering password as 1233");
         fb.enterPassword("Pass@1233");
+
+    }
+
+    @Step("entering validPassword")
+    @Test(description = "validate valid password entered in textBox")
+    public void validateValidPasswordEntered() throws FileNotFoundException {
+        fb_page fb = new fb_page();
+//        Allure.addAttachment("entering passWord", Utility.takeScreenShot());
+        logger.info("entering password as atul@123");
+        fb.enterPassword("atu@123");
+
+    }
+
+    @Step("entering wrong password")
+    @Test(description = "validate wrong password entered in textBox")
+    public void validateWrongPasswordEntered() throws FileNotFoundException {
+        fb_page fb = new fb_page();
+//        Allure.addAttachment("entering passWord", Utility.takeScreenShot());
+        logger.info("entering password as &*&^&");
+        fb.enterPassword("*&*&^%$%");
 
     }
 }

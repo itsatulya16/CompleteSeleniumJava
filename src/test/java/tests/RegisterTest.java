@@ -34,7 +34,7 @@ public class RegisterTest extends BaseClass {
         String passwordValue = "Test@1234";
 
         /*@Step 1: login to ebay, Expected: login successful*/
-        driver.get("https://www.ebay.com/");
+        getDriver().get("https://www.ebay.com/");
         HomePage homePage = new HomePage();
         homePage.validateEbayOpen();
 
@@ -44,7 +44,7 @@ public class RegisterTest extends BaseClass {
         registerPage.validateRegisterPageOpens();
 
         /*@Step 3: validate both radio options display 1. Personal and 2. Business*/
-        RegisterPage.validateRadioOptionsDisplay(personalRadioOptLabel, businessRadioOptLabel);
+        registerPage.validateRadioOptionsDisplay(personalRadioOptLabel, businessRadioOptLabel);
 
         /*@Step 4: select personal account radio option*/
         registerPage.selectRadioOption(personalRadioOptLabel);
@@ -80,7 +80,7 @@ public class RegisterTest extends BaseClass {
     @Test
     public void validateEbaySiteOpens() throws InterruptedException {
         /*@Step 1: launch browser and hit ebay link, Expected: validate ebay home page opens*/
-        driver.get("https://www.ebay.com/");
+        getDriver().get("https://www.ebay.com/");
         HomePage homePage = new HomePage();
         homePage.validateEbayOpen();
     }

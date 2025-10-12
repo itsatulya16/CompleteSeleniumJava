@@ -29,15 +29,23 @@ import java.time.Duration;
 
 public class BaseClass {
 
-    public static WebDriver driver;
+    // it's used for parallel testing > each test have separate thread and test is isolated
+    protected static ThreadLocal<WebDriver> driver = new ThreadLocal<>();
+
+    public WebDriver getDriver(){
+        return driver.get();
+    }
 
     private static final Logger log = LogManager.getLogger(BaseClass.class);
 
-    @BeforeMethod
+
+   @BeforeMethod
+   // this method runs test in local as well as on remote server using selenium grid
     public void setUp() {
         String browser = Utility.getValue("browser");
         switch (browser) {
             case "chrome":
+                //to run tests in local for debug
                 try {
                     WebDriverManager.chromedriver().clearDriverCache().setup();
                     ChromeOptions options = new ChromeOptions();
@@ -47,7 +55,7 @@ public class BaseClass {
                         options.addArguments("--headless");
                     }
 
-                    driver = new ChromeDriver(options);
+                     driver.set(new ChromeDriver(options));
 
                     log.info("Chrome driver setup successfully");
                 } catch (Exception e) {
@@ -58,10 +66,11 @@ public class BaseClass {
 
             case "docker":
                 try {
-                    //to run in docker container --------------------------------------
+                    //to run in docker container in remote machine <my gaming pc> -
                     DesiredCapabilities capabilities = new DesiredCapabilities();
                     capabilities.setBrowserName("chrome");
-                    driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), capabilities);
+                    driver.set(new RemoteWebDriver(new URL("http://192.168.0.104:4444/wd/hub"), capabilities));
+                    //this is my remote gaming pc--
 
                 } catch (Exception e) {
 
@@ -69,31 +78,13 @@ public class BaseClass {
 
                 }
                 break;
-            case "fireFox":
-                try {
-                    System.setProperty("webdriver.gecko.driver", "/snap/bin/geckodriver");
-
-                    FirefoxOptions options = new FirefoxOptions();
-                    if (Boolean.parseBoolean(Utility.getValue("headless"))) {
-                        options.addArguments("--headless");
-                    }
-                    options.addArguments("--disable-notifications");
-                    options.addArguments("--disable-popup-blocking");
-
-                    driver = new FirefoxDriver(options);
-                } catch (Exception f) {
-
-                    log.warn("Error in setting up Firefox driver: {}", f.getMessage());
-                }
             default:
                 log.error("no browser set up found");
                 break;
         }
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-        driver.get("https://www.facebook.com");
+        getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        getDriver().get("https://www.facebook.com");
     }
-
-
 
 //    @BeforeTest
 //    public void clearDBLogs() {
@@ -120,8 +111,9 @@ public class BaseClass {
 
        // TestLogger.logTestResult(result.getName(), status, (result.getEndMillis() - result.getStartMillis()) / 1000.0);
 
-        if (driver != null) {
-            driver.quit();
+        if (getDriver() != null) {
+            getDriver().quit();
+            driver.remove();
         }
     }
 

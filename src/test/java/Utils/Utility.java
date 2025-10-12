@@ -18,9 +18,9 @@ public class Utility extends BaseClass {
     /*
      * This method is implemented with explicit wait
      * */
-    public static WebElement getWaitExplicit(String xpath) {
-        WebElement element = driver.findElement(By.xpath(xpath));
-        Wait<WebDriver> wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+    public WebElement getWaitExplicit(String xpath) {
+        WebElement element = getDriver().findElement(By.xpath(xpath));
+        Wait<WebDriver> wait = new WebDriverWait(getDriver(), Duration.ofSeconds(5));
         wait.until(ExpectedConditions.visibilityOf(element));
         return element;
     }
@@ -28,11 +28,11 @@ public class Utility extends BaseClass {
     /*
      * This method is  used to element visiblity, implemented with Fluent wait
      * */
-    public static WebElement waitForElementVisibility(String xpath) {
+    public WebElement waitForElementVisibility(String xpath) {
         if (xpath == null || xpath.isEmpty()) {
             throw new IllegalArgumentException("XPath cannot be null or empty");
         }
-        Wait<WebDriver> wait = new FluentWait<>(driver)
+        Wait<WebDriver> wait = new FluentWait<>(getDriver())
                 .withTimeout(Duration.ofSeconds(5))
                 .pollingEvery(Duration.ofMillis(2))
                 .ignoring(NoSuchElementException.class);
@@ -42,11 +42,11 @@ public class Utility extends BaseClass {
     /*
      * This method is used to wait until element is ready to click
      * */
-    public static WebElement waitForElementToBeClickable(String xpath) {
+    public WebElement waitForElementToBeClickable(String xpath) {
         if (xpath == null || xpath.isEmpty()) {
             throw new IllegalArgumentException("XPath cannot be null or empty");
         }
-        Wait<WebDriver> wait = new FluentWait<>(driver)
+        Wait<WebDriver> wait = new FluentWait<>(getDriver())
                 .withTimeout(Duration.ofSeconds(5))
                 .pollingEvery(Duration.ofMillis(2))
                 .ignoring(NoSuchElementException.class);
