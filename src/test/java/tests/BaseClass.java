@@ -29,6 +29,7 @@ import java.time.Duration;
 
 public class BaseClass {
 
+
     // it's used for parallel testing > each test have separate thread and test is isolated
     protected static ThreadLocal<WebDriver> driver = new ThreadLocal<>();
 
@@ -86,6 +87,22 @@ public class BaseClass {
         getDriver().get("https://www.facebook.com");
     }
 
+    // cross browser + parallel test
+
+    @Parameters("browser")
+//    @BeforeMethod
+    public void setUpCrossBrowser(String browser){
+       if (browser.equals("chrome")){
+           WebDriverManager.chromedriver().clearDriverCache().setup();
+           driver.set(new ChromeDriver());
+       } else if (browser.equals("firefox")) {
+           WebDriverManager.firefoxdriver().clearDriverCache().setup();
+           driver.set(new FirefoxDriver());
+       }
+       getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+       getDriver().get("https://www.facebook.com");
+    }
+
 //    @BeforeTest
 //    public void clearDBLogs() {
 //        TestLogger.clearTestResults();
@@ -98,7 +115,7 @@ public class BaseClass {
         if (ITestResult.FAILURE == result.getStatus()) {
             status = "FAILURE";
             System.out.println("Test failed: " + result.getName());
-            Allure.addAttachment(result.getName(), Utility.takeScreenShot());
+            Allure.addAttachment(result.getName(), new Utility().takeScreenShot());
         } else if (ITestResult.SUCCESS == result.getStatus()) {
             status = "SUCCESS";
             System.out.println("Test passed: " + result.getName());
@@ -111,10 +128,9 @@ public class BaseClass {
 
        // TestLogger.logTestResult(result.getName(), status, (result.getEndMillis() - result.getStartMillis()) / 1000.0);
 
-        if (getDriver() != null) {
             getDriver().quit();
             driver.remove();
-        }
+
     }
 
 

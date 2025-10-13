@@ -54,8 +54,8 @@ public class Utility extends BaseClass {
     }
 
     // This method is used to take screen shot of page
-    public static FileInputStream takeScreenShot() throws FileNotFoundException {
-        TakesScreenshot screenshot = (TakesScreenshot) driver;
+    public FileInputStream takeScreenShot() throws FileNotFoundException {
+        TakesScreenshot screenshot = (TakesScreenshot) getDriver();
         File srcFile = screenshot.getScreenshotAs(OutputType.FILE);
         return new FileInputStream(srcFile);
     }

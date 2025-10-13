@@ -1,16 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
-<suite name="smokTest" parallel="methods" thread-count="1">
+<suite name="smokTest" parallel="methods" thread-count="2">
     <listeners>
         <listener class-name="io.qameta.allure.testng.AllureTestNg" />
 <!--        <listener class-name="Utils.MyListnerSetUp"></listener>-->
     </listeners>
 
-    <test name="Validation Tests">
+    <test name="chrome parallel Tests">
+        <parameter name="browser" value="chrome"></parameter>
         <classes>
             <class name="tests.validationTest" />
 <!--           <class name="tests.RegisterTest" />-->
         </classes>
     </test>
+
+<!--firefox tests  // cross browser testing -->
+
+<!--    <test name="firefox Tests">-->
+<!--        <parameter name="browser" value="firefox"></parameter>-->
+<!--        <classes>-->
+<!--            <class name="tests.validationTest" />-->
+<!--            &lt;!&ndash;           <class name="tests.RegisterTest" />&ndash;&gt;-->
+<!--        </classes>-->
+<!--    </test>-->
 </suite>

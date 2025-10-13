@@ -8,6 +8,7 @@ import io.qameta.allure.Description;
 import io.qameta.allure.Step;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.testng.Assert;
 import org.testng.annotations.*;
 
 import java.io.FileNotFoundException;
@@ -45,6 +46,7 @@ public class validationTest extends BaseClass {
 //        Allure.addAttachment("entering passWord", Utility.takeScreenShot());
         logger.info("entering password as atul@123");
         fb.enterPassword("atu@123");
+        Assert.assertTrue(false);
 
     }
 
