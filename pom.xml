@@ -132,89 +132,45 @@
 
 
     <build>
+        <plugins>
 
-            <plugins>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.13.0</version>
-                    <configuration>
-                        <!-- put your configurations here -->
-                    </configuration>
-                </plugin>
-                    <plugin>
-                        <groupId>io.qameta.allure</groupId>
-                        <artifactId>allure-maven</artifactId>
-                        <version>2.11.2</version>
-                        <configuration>
-                            <reportVersion>2.24.0</reportVersion>
-                        </configuration>
-                    </plugin>
+            <!-- Compiler Plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.13.0</version>
+                <configuration>
+                    <source>11</source>
+                    <target>11</target>
+                </configuration>
+            </plugin>
 
+            <!-- Allure Plugin -->
+            <plugin>
+                <groupId>io.qameta.allure</groupId>
+                <artifactId>allure-maven</artifactId>
+                <version>2.12.0</version>
+                <configuration>
+                    <reportVersion>2.24.0</reportVersion>
+                </configuration>
+            </plugin>
 
+            <!-- Surefire Plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.2.5</version>
+                <configuration>
+                    <systemPropertyVariables>
+                        <allure.results.directory>target/allure-results</allure.results.directory>
+                    </systemPropertyVariables>
+                    <suiteXmlFiles>
+                        <suiteXmlFile>${suiteXmlFiles}</suiteXmlFile>
+                    </suiteXmlFiles>
+                </configuration>
+            </plugin>
 
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-surefire-plugin</artifactId>
-                    <version>3.2.5</version>
-                    <configuration>
-
-                        <systemPropertyVariables>
-                            <allure.results.directory>target/allure-results</allure.results.directory>
-                        </systemPropertyVariables>
-                        <suiteXmlFiles>
-                            <suiteXmlFile>${suiteXmlFiles}</suiteXmlFile>
-<!--                            <suiteXmlFile>master-suite.xml</suiteXmlFile>-->
-                        </suiteXmlFiles>
-
-
-                    </configuration>
-                </plugin>
-
-<!--                <plugin>-->
-<!--                <groupId>org.apache.maven.plugins</groupId>-->
-<!--                <artifactId>maven-compiler-plugin</artifactId>-->
-<!--                <version>3.8.1</version>-->
-<!--                <configuration>-->
-<!--                <source>11</source>-->
-<!--                <target>11</target>-->
-<!--                    </configuration>-->
-<!--                </plugin>-->
-
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-surefire-plugin</artifactId>
-                    <version>3.0.0-M5</version>
-                    <configuration>
-                        <systemPropertyVariables>
-                            <allure.results.directory>target/allure-results</allure.results.directory>
-                        </systemPropertyVariables>
-                    </configuration>
-                </plugin>
-
-<!--                below plugin is used to generate allure report automatically after test execution-->
-                <plugin>
-                    <groupId>org.codehaus.mojo</groupId>
-                    <artifactId>exec-maven-plugin</artifactId>
-                    <version>3.0.0</version>
-                    <executions>
-                        <execution>
-                            <id>allure-report</id>
-                            <phase>verify</phase>
-                            <goals>
-                                <goal>exec</goal>
-                            </goals>
-                            <configuration>
-                                <executable>allure</executable>
-                                <arguments>
-                                    <argument>serve</argument>
-                                    <argument>target/allure-results</argument>
-                                </arguments>
-                            </configuration>
-                        </execution>
-                    </executions>
-                </plugin>
-            </plugins>
-
+        </plugins>
     </build>
+
 </project>
