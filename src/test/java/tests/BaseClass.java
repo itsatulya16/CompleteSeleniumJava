@@ -70,7 +70,7 @@ public class BaseClass {
                     //to run in docker container in remote machine <my gaming pc> -
                     DesiredCapabilities capabilities = new DesiredCapabilities();
                     capabilities.setBrowserName("chrome");
-                    driver.set(new RemoteWebDriver(new URL("http://192.168.0.104:4444/wd/hub"), capabilities));
+                    driver.set(new RemoteWebDriver(new URL("http://192.168.0.108:4444/wd/hub"), capabilities));
                     //this is my remote gaming pc--
 
                 } catch (Exception e) {
